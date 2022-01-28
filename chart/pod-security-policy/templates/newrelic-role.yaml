@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: psp-newrelic
+  namespace: {{ .Release.Namespace }}
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - psp-newrelic
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
