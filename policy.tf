@@ -21,6 +21,7 @@ resource "newrelic_nrql_alert_condition" "cluster-does-not-response" {
   expiration_duration            = 300
   close_violations_on_expiration = true
   aggregation_method             = "event_timer"
+  aggregation_timer              = 60
 
   nrql {
     query = "FROM K8sClusterSample SELECT count(*) WHERE clusterName = '${var.cluster_name}'"
@@ -40,6 +41,7 @@ resource "newrelic_nrql_alert_condition" "node-cpu-high" {
   violation_time_limit_seconds = 86400
   value_function               = "single_value"
   aggregation_method           = "event_timer"
+  aggregation_timer            = 60
 
   nrql {
     query = "FROM K8sNodeSample SELECT average(cpuUsedCores/capacityCpuCores*100) WHERE clusterName = '${var.cluster_name}' FACET nodeName"
@@ -66,6 +68,7 @@ resource "newrelic_nrql_alert_condition" "node-memory-high" {
   violation_time_limit_seconds = 86400
   value_function               = "single_value"
   aggregation_method           = "event_timer"
+  aggregation_timer            = 60
 
   nrql {
     query = "FROM K8sNodeSample SELECT average(memoryWorkingSetBytes/capacityMemoryBytes*100) WHERE clusterName = '${var.cluster_name}' FACET nodeName"
@@ -92,6 +95,7 @@ resource "newrelic_nrql_alert_condition" "node-pod-high" {
   violation_time_limit_seconds = 86400
   value_function               = "single_value"
   aggregation_method           = "event_timer"
+  aggregation_timer            = 60
 
   nrql {
     query = "FROM K8sPodSample SELECT latest(isScheduled) WHERE clusterName = '${var.cluster_name}' FACET podName"
@@ -113,6 +117,7 @@ resource "newrelic_nrql_alert_condition" "container-cpu-high" {
   expiration_duration            = 300
   close_violations_on_expiration = true
   aggregation_method             = "event_timer"
+  aggregation_timer              = 60
 
   nrql {
     query = "FROM K8sContainerSample SELECT average(cpuCoresUtilization) WHERE clusterName = '${var.cluster_name}' AND namespace IN (${local.namespaces_joined}) FACET containerName"
@@ -141,6 +146,7 @@ resource "newrelic_nrql_alert_condition" "container-memory-high" {
   expiration_duration            = 300
   close_violations_on_expiration = true
   aggregation_method             = "event_timer"
+  aggregation_timer              = 60
 
   nrql {
     query = "FROM K8sContainerSample SELECT average(memoryWorkingSetUtilization) WHERE clusterName = '${var.cluster_name}' AND namespace IN (${local.namespaces_joined}) FACET containerName"
@@ -169,6 +175,7 @@ resource "newrelic_nrql_alert_condition" "pod-not-ready" {
   expiration_duration            = 300
   close_violations_on_expiration = true
   aggregation_method             = "event_timer"
+  aggregation_timer              = 60
 
   nrql {
     query = "FROM K8sPodSample SELECT latest(isReady) WHERE clusterName = '${var.cluster_name}' AND namespace IN (${local.namespaces_joined}) AND status != 'Succeeded' AND createdKind != 'Job' FACET podName"
@@ -190,6 +197,7 @@ resource "newrelic_nrql_alert_condition" "container-out-of-space" {
   expiration_duration            = 300
   close_violations_on_expiration = true
   aggregation_method             = "event_timer"
+  aggregation_timer              = 60
 
   nrql {
     query = "FROM K8sContainerSample SELECT average(fsUsedPercent) WHERE clusterName = '${var.cluster_name}' AND namespace IN (${local.namespaces_joined}) FACET containerName"
@@ -218,6 +226,7 @@ resource "newrelic_nrql_alert_condition" "replicaset-not-desired-amount" {
   expiration_duration            = 300
   close_violations_on_expiration = true
   aggregation_method             = "event_timer"
+  aggregation_timer              = 60
 
   nrql {
     query = "FROM K8sReplicasetSample SELECT latest(podsDesired - podsReady) WHERE clusterName = '${var.cluster_name}' AND namespace IN (${local.namespaces_joined}) FACET replicasetName"
