@@ -32,22 +32,6 @@ variable "privileged" {
   description = "Set privileged mode. The tradeoff is that the solution will only collect metrics from Kubernetes, but it will not collect any metric from the underlying hosts directly."
 }
 
-variable "alert_channel_email_config" {
-  type = object({
-    recipients = string
-  })
-  default     = null
-  description = "The alert channel email config."
-}
-
-variable "alert_channel_webhook_config" {
-  type = object({
-    base_url = string
-  })
-  default     = null
-  description = "The alert channel webhook config."
-}
-
 variable "pixie_enabled" {
   type        = bool
   default     = false
@@ -56,7 +40,7 @@ variable "pixie_enabled" {
 
 variable "pixie_api_key" {
   type    = string
-  default = "" #tfsec:ignore:general-secrets-sensitive-in-variable
+  default = ""
 }
 
 variable "pixie_deploy_key" {
@@ -67,10 +51,4 @@ variable "pixie_deploy_key" {
 variable "enable_psp" {
   type    = bool
   default = false
-}
-
-variable "additional_alerting_namespaces" {
-  type        = list(string)
-  description = "Additional namespaces that are included in default alerting."
-  default     = []
 }
