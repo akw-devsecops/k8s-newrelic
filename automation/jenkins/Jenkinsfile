@@ -1,0 +1,52 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+                spec:
+                  containers:
+                  - name: sonar-scanner-cli
+                    image: sonarsource/sonar-scanner-cli
+                    imagePullPolicy: IfNotPresent
+                    command:
+                    - cat
+                    tty: true
+                  - name: terraform
+                    image: hashicorp/terraform
+                    imagePullPolicy: IfNotPresent
+                    command:
+                    - cat
+                    tty: true
+            '''
+        }
+    }
+    stages {
+        stage('Terraform') {
+            steps {
+                container('terraform') {
+                    sh 'terraform init'
+                    sh 'terraform version'
+                    sh 'terraform validate'
+                }
+            }
+        }
+        stage('Test Default') {
+            steps {
+                container('terraform') {
+                    dir('examples/default') {
+                        sh 'terraform init'
+                        sh 'terraform plan'
+                    }
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                container('sonar-scanner-cli') {
+                    withSonarQubeEnv('sonarqube') {
+                        sh "sonar-scanner -Dsonar.projectKey=TM_k8s-newrelic"
+                    }
+                }
+            }
+        }
+    }
+}
