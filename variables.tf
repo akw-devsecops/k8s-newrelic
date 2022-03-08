@@ -26,6 +26,12 @@ variable "chart_version" {
   description = "The chart version to be used. Defaults to latest."
 }
 
+variable "low_data_mode" {
+  type        = bool
+  default     = false
+  description = "Reduce the amount of data ingested at the cost of dropping detailed information."
+}
+
 variable "privileged" {
   type        = bool
   default     = true
