@@ -33,7 +33,7 @@ resource "helm_release" "newrelic-bundle" {
 
   set {
     name  = "kube-state-metrics.resources.requests.memory"
-    value = "32Mi"
+    value = "64Mi"
   }
 
   set {
