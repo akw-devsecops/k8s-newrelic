@@ -36,6 +36,7 @@ No modules.
 | <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | The chart version to be used. Defaults to latest. | `string` | `""` | no |
 | <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Create the namespace if set to true. | `bool` | `false` | no |
 | <a name="input_enable_psp"></a> [enable\_psp](#input\_enable\_psp) | n/a | `bool` | `false` | no |
+| <a name="input_low_data_mode"></a> [low\_data\_mode](#input\_low\_data\_mode) | Reduce the amount of data ingested at the cost of dropping detailed information. | `bool` | `false` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace in which the bundle will be installed. | `string` | `"newrelic"` | no |
 | <a name="input_pixie_api_key"></a> [pixie\_api\_key](#input\_pixie\_api\_key) | n/a | `string` | `""` | no |
 | <a name="input_pixie_deploy_key"></a> [pixie\_deploy\_key](#input\_pixie\_deploy\_key) | n/a | `string` | `""` | no |

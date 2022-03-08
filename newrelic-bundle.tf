@@ -17,6 +17,11 @@ resource "helm_release" "newrelic-bundle" {
   }
 
   set {
+    name  = "global.lowDataMode"
+    value = var.low_data_mode
+  }
+
+  set {
     name  = "newrelic-infrastructure.privileged"
     value = var.privileged
   }
@@ -33,7 +38,7 @@ resource "helm_release" "newrelic-bundle" {
 
   set {
     name  = "kube-state-metrics.resources.requests.memory"
-    value = "32Mi"
+    value = "64Mi"
   }
 
   set {
