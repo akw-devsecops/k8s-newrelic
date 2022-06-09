@@ -32,17 +32,17 @@ resource "helm_release" "newrelic-bundle" {
   }
 
   set {
-    name  = "kube-state-metrics.resources.requests.cpu"
+    name  = "ksm.resources.requests.cpu"
     value = "50m"
   }
 
   set {
-    name  = "kube-state-metrics.resources.requests.memory"
+    name  = "ksm.resources.requests.memory"
     value = "64Mi"
   }
 
   set {
-    name  = "kube-state-metrics.resources.limits.memory"
+    name  = "ksm.resources.limits.memory"
     value = "64Mi"
   }
 
