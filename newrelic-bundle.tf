@@ -32,38 +32,8 @@ resource "helm_release" "newrelic-bundle" {
   }
 
   set {
-    name  = "ksm.resources.requests.cpu"
-    value = "50m"
-  }
-
-  set {
-    name  = "ksm.resources.requests.memory"
-    value = "64Mi"
-  }
-
-  set {
-    name  = "ksm.resources.limits.memory"
-    value = "64Mi"
-  }
-
-  set {
     name  = "prometheus.enabled"
     value = true
-  }
-
-  set {
-    name  = "nri-prometheus.resources.requests.cpu"
-    value = "50m"
-  }
-
-  set {
-    name  = "nri-prometheus.resources.requests.memory"
-    value = "256Mi"
-  }
-
-  set {
-    name  = "nri-prometheus.resources.limits.memory"
-    value = "256Mi"
   }
 
   set {
@@ -72,38 +42,8 @@ resource "helm_release" "newrelic-bundle" {
   }
 
   set {
-    name  = "nri-kube-events.resources.requests.cpu"
-    value = "50m"
-  }
-
-  set {
-    name  = "nri-kube-events.resources.requests.memory"
-    value = "128Mi"
-  }
-
-  set {
-    name  = "nri-kube-events.resources.limits.memory"
-    value = "128Mi"
-  }
-
-  set {
     name  = "logging.enabled"
     value = true
-  }
-
-  set {
-    name  = "newrelic-logging.resources.requests.cpu"
-    value = "50m"
-  }
-
-  set {
-    name  = "nri-metadata-injection.resources.requests.cpu"
-    value = "50m"
-  }
-
-  set {
-    name  = "newrelic-infrastructure.resources.requests.cpu"
-    value = "50m"
   }
 
   set {
