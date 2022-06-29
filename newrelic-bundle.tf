@@ -42,8 +42,13 @@ resource "helm_release" "newrelic-bundle" {
   }
 
   set {
-    name  = "logging.enabled"
+    name  = "newrelic-logging.enabled"
     value = true
+  }
+
+  set {
+    name  = "newrelic-logging.resources.requests.cpu"
+    value = "100m"
   }
 
   set {
